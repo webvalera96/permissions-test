@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: perm-test-deployment
+  namespace: perm-test
+  labels:
+    app: perm-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: perm-test
+  template:
+    metadata:
+      labels:
+        app: perm-test
+    spec:
+      containers:
+        - name: nginx
+          image: registry.cluster.local/perm-test:1.0
+          securityContext:
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop: ["ALL"]
+          ports:
+            - containerPort: 8080
+      imagePullSecrets:
+        - name: docker-registry-key
+      securityContext:
+        runAsNonRoot: true
