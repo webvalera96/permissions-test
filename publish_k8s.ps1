@@ -7,5 +7,6 @@ kubectl create namespace perm-test
 
 kubectl apply -f docker-registry-key.yaml --namespace perm-test
 kubectl apply -f dc.yaml --namespace perm-test
+kubectl apply -f ap.yaml --namespace perm-test
 
 

@@ -1,0 +1,26 @@
+apiVersion: policies.kubewarden.io/v1alpha2
+kind: AdmissionPolicy
+metadata:
+  name: psp-user-group
+  namespace: perm-test
+spec:
+  module: "registry://ghcr.io/kubewarden/policies/user-group-psp:v0.1.5"
+  rules:
+    - apiGroups: [""]
+      apiVersions: ["v1"]
+      resources: ["pods"]
+      operations:
+        - CREATE
+        - UPDATE
+  mutating: true
+  settings:
+    run_as_user:
+      rule: "MustRunAsNonRoot"
+    run_as_group:
+      rule: "MustRunAs"
+      overwrite: true
+      ranges:
+        - min: 50000
+          max: 50000
+    supplemental_groups:
+      rule: "RunAsAny"

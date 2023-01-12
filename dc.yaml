@@ -19,9 +19,12 @@ spec:
         - name: nginx
           image: registry.cluster.local/perm-test:1.0
           securityContext:
+            privileged: false
             readOnlyRootFilesystem: true
             capabilities:
               drop: ["ALL"]
+#            runAsUser: 46
+          imagePullPolicy: Always
           ports:
             - containerPort: 8080
       imagePullSecrets:
