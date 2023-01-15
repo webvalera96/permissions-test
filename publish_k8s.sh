@@ -1,7 +1,7 @@
-docker login registry.cluster.local
-docker rmi perm-test:1.0
-docker build . -t registry.cluster.local/perm-test:1.0
-docker push registry.cluster.local/perm-test:1.0
+sudo docker login registry.cluster.local
+sudo docker rmi perm-test:1.0
+sudo docker build . -t registry.cluster.local/perm-test:1.0
+sudo docker push registry.cluster.local/perm-test:1.0
 
 kubectl create namespace perm-test
 

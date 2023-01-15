@@ -1,11 +1,11 @@
 #!/bin/bash
 
-docker stop perm_test || true
-docker rm perm_test --force || true
-docker rmi perm-test:$1 || true
+sudo docker stop perm_test || true
+sudo docker rm perm_test --force || true
+sudo docker rmi perm-test:1.0 || true
 
-go build -o binaryFiles/main
+CGO_ENABLED=0 go build -o binaryFiles/main ./src
 
-docker build . -t perm-test:$1
-docker run --name perm_test -d -p 8080:8080 perm-test:$1
-docker exec -it perm_test bash
+sudo docker build . -t perm-test:1.0
+sudo docker run --name perm_test -d -p 8080:8080 perm-test:1.0
+sudo docker exec -it perm_test bash

@@ -1,2 +1,2 @@
-#!/etc/watcher/bash
+#!/bin/bash
 /etc/watcher/main

@@ -15,12 +15,11 @@ spec:
   mutating: true
   settings:
     run_as_user:
-      rule: "MustRunAsNonRoot"
-    run_as_group:
       rule: "MustRunAs"
-      overwrite: true
       ranges:
-        - min: 50000
-          max: 50000
+        - min: 10000
+          max: 20000
+    run_as_group:
+      rule: "RunAsAny"
     supplemental_groups:
       rule: "RunAsAny"

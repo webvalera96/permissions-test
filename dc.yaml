@@ -19,15 +19,17 @@ spec:
         - name: nginx
           image: registry.cluster.local/perm-test:1.0
           securityContext:
+            allowPrivilegeEscalation: false
             privileged: false
             readOnlyRootFilesystem: true
             capabilities:
               drop: ["ALL"]
-#            runAsUser: 46
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
       imagePullSecrets:
         - name: docker-registry-key
       securityContext:
+        seccompProfile:
+          type: RuntimeDefault
         runAsNonRoot: true
