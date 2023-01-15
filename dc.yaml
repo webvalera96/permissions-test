@@ -18,6 +18,9 @@ spec:
       containers:
         - name: nginx
           image: registry.cluster.local/perm-test:1.0
+          volumeMounts:
+            - mountPath: /etc/watcher/tmp
+              name: tmp
           securityContext:
             allowPrivilegeEscalation: false
             privileged: false
@@ -27,9 +30,14 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
+      volumes:
+        - name: tmp
+          emptyDir:
+            sizeLimit: 500Mi
       imagePullSecrets:
         - name: docker-registry-key
       securityContext:
+        fsGroup: 10000
         seccompProfile:
           type: RuntimeDefault
         runAsNonRoot: true
