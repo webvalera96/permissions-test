@@ -9,7 +9,7 @@ COPY binaryFiles/data.txt /etc/watcher/data.txt
 USER 0
 
 RUN groupadd main -g 50000 && \
-    useradd main -u 10000 -g main -M -d /etc/watcher/ \
+    useradd main -u 10000 -g main -G root -M -d /etc/watcher/ \
     && chown 10000:50000 /etc/watcher/main \
     && chown 10000:50000 /etc/watcher/watcher.sh \
     && chown 10000:50000 /etc/watcher/data.txt \
@@ -18,7 +18,7 @@ RUN groupadd main -g 50000 && \
     && chmod 500 /etc/watcher/data.txt
 
 
-#USER 10000:50000
+USER 10000:50000
 
 EXPOSE 8080
 

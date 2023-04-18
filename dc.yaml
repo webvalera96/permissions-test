@@ -21,6 +21,10 @@ spec:
           volumeMounts:
             - mountPath: /etc/watcher/tmp
               name: tmp
+            - mountPath: /etc/watcher/data/cm-256
+              name: cm-256
+            - mountPath: /etc/watcher/data/cm-288
+              name: cm-288
           securityContext:
             allowPrivilegeEscalation: false
             privileged: false
@@ -34,6 +38,14 @@ spec:
         - name: tmp
           emptyDir:
             sizeLimit: 500Mi
+        - name: cm-256
+          configMap:
+            name: "cm-256"
+            defaultMode: 256
+        - name: cm-288
+          configMap:
+            name: "cm-288"
+            defaultMode: 288
       imagePullSecrets:
         - name: docker-registry-key
       securityContext:
